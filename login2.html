@@ -3,32 +3,9 @@
 
 <head>
   <title>Login Page</title>
-  <style>
-    body {
-      text-align: center;
-      background-color: #f1f1f1;
-    }
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="script.js"></script>
 
-    h1 {
-      margin: 50px auto 20px;
-    }
-
-    form {
-      max-width: 500px;
-      margin: 0 auto;
-      background-color: #fff;
-      border-radius: 5px;
-      padding: 20px;
-    }
-
-    label,
-    input[type="text"],
-    input[type="password"],
-    input[type="button"] {
-      display: block;
-      margin: 10px auto;
-    }
-  </style>
 </head>
 
 <body>
@@ -56,84 +33,7 @@
 
   <div id="message"></div>
 
-  <script>
 
-    let accounts = [];
-
-
-    function login() {
-
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
-
-
-      const input = document.createElement("input");
-      input.type = "file";
-      input.accept = ".json";
-      input.addEventListener("change", function () {
-        const file = this.files[0];
-        const reader = new FileReader();
-        reader.addEventListener("load", function () {
-
-          accounts = JSON.parse(this.result);
-
-
-          for (let i = 0; i < accounts.length; i++) {
-            if (
-              accounts[i].username === username &&
-              accounts[i].password === password
-            ) {
-              e
-              document.getElementById("message").innerHTML =
-                "Logged in successfully!";
-              window.location.href = "index2.html";
-              return;
-            }
-          }
-
-
-          document.getElementById("message").innerHTML =
-            "Invalid username or password";
-        });
-        reader.readAsText(file);
-      });
-      input.click();
-    }
-
-
-    function createAccount() {
-
-      const username = document.getElementById("new-username").value;
-      const password = document.getElementById("new-password").value;
-
-
-      for (let i = 0; i < accounts.length; i++) {
-        if (accounts[i].username === username) {
-
-          document.getElementById("message").innerHTML =
-            "Username already taken";
-          return;
-        }
-      }
-
-      const newAccount = { username: username, password: password };
-      accounts.push(newAccount);
-
-      saveAccountsToJSON();
-
-      document.getElementById("message").innerHTML =
-        "Account created successfully!";
-    }
-    function saveAccountsToJSON() {
-
-      const accountsJSON = JSON.stringify(accounts);
-
-      const a = document.createElement("a");
-      a.href = "data:text/json," + encodeURIComponent(accountsJSON);
-      a.download = "accounts.json";
-      a.click();
-    }
-  </script>
 </body>
 
 </html>

@@ -1,75 +1,84 @@
-console.clear();
 
-let aufgabenliste = [];
-
+let accounts = [];
 
 
+function login() {
+
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 
 
+    /*const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.addEventListener("change", function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.addEventListener("load", function () {
+
+            accounts = JSON.parse(this.result);**/
+    const accountsJSON = localStorage.getItem('accounts');
 
 
-function hinzufuegen() {
-    let benutzerEingabe = document.getElementById('aufgabe').value;
-    aufgabenliste.push(benutzerEingabe);
-
-    console.log(aufgabenliste);
-
-    aufgabenlisteAnzeigen();
-}
-
-function aufgabenlisteAnzeigen() {
-    let anzahlAufgaben = aufgabenliste.length;
-    let i = 0;
-    let aufgabenlisteHTML = '';
-    while (i < anzahlAufgaben) {
-        console.log(aufgabenliste[i]);
-        let aufgabeHTML = '<p>' + aufgabenliste[i] + '</p>';
-        aufgabenlisteHTML = aufgabenlisteHTML + aufgabeHTML;
-        i++;
-
+    //if tasksJSON contains data
+    if (accountsJSON) {
+        accounts = JSON.parse(accountsJSON);
     }
-    document.getElementById('aufgabenliste').innerHTML = aufgabenlisteHTML;
 
+
+    for (let i = 0; i < accounts.length; i++) {
+        if (
+            accounts[i].username === username &&
+            accounts[i].password === password
+        ) {
+            /*e**/
+            document.getElementById("message").innerHTML =
+                "Logged in successfully!";
+            window.location.href = "einkauf/einkauf.html";
+            return;
+        }
+    }
+
+
+    document.getElementById("message").innerHTML =
+        "Invalid username or password";
+    /* });
+     reader.readAsText(file);
+ });
+ input.click();**/
 }
 
 
+function createAccount() {
 
-/*aufgabenliste = ['Apfel', 'Birne', 'Salat'];
-
-console.log(aufgabenliste[0]);
-console.log(aufgabenliste[1]);
-console.log(aufgabenliste[2]);*/
+    const username = document.getElementById("new-username").value;
+    const password = document.getElementById("new-password").value;
 
 
+    for (let i = 0; i < accounts.length; i++) {
+        if (accounts[i].username === username) {
 
+            document.getElementById("message").innerHTML =
+                "Username already taken";
+            return;
+        }
+    }
 
+    const newAccount = { username: username, password: password };
+    accounts.push(newAccount);
 
+    saveAccountsToJSON();
 
-
-
-
-
-
-
-/*function autoMarke(marke, farbe) {
-    /* console.log('Die Marke ist ' + marke);
-     console.log('Die Farbe ist ' + farbe); 
-
-    return 'Der ' + marke + ' ist ' + farbe;
+    document.getElementById("message").innerHTML =
+        "Account created successfully!";
 }
+function saveAccountsToJSON() {
 
-let auto1 = autoMarke('Audi', 'Rot');
-let auto2 = autoMarke('BMW', 'Schwarz');
+    const accountsJSON = JSON.stringify(accounts);
+    localStorage.setItem('accounts', accountsJSON);
 
-console.log(auto1);
-console.log(auto2);**/
-
-/*let meineListe = ['Brot', 'Salat', 'Fleisch'];
-for (let i = 1; i <= 3; i++) {
-    console.log(i);
-    console.log(meineListe[i - 1]);
-
-}**/
-
-
-
+    /*const a = document.createElement("a");
+    a.href = "data:text/json," + encodeURIComponent(accountsJSON);
+    a.download = "accounts.json";
+    a.click();**/
+}
