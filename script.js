@@ -22,7 +22,7 @@ window.onload = function () {
 
         //if tasksJSON contains data
         if (accountsJSON) {
-            accounts = JSON.parse(accountsJSON);
+            accounts = JSON.parse(accountsJSON); /* Json Format zurück ind Javascript Objekt umwandeln**/
         }
 
 
@@ -64,17 +64,17 @@ window.onload = function () {
             }
         }
 
-        const newAccount = { username: username, password: password };
+        const newAccount = { username: username, password: password };  /*->definition des object-literal account. bestehend aus username und passwort**/
         accounts.push(newAccount);
 
         saveAccountsToJSON();
 
-        document.getElementById("message").innerHTML =
+        document.getElementById("message").innerHTML =  /*->Durch diese 2. Zeilen code kommt der kommentar "Account created successfully"**/
             "Account created successfully!";
     }
     function saveAccountsToJSON() {
 
-        const accountsJSON = JSON.stringify(accounts);
+        const accountsJSON = JSON.stringify(accounts);    /* account ins Json format umwandeln**/
         localStorage.setItem('accounts', accountsJSON);
 
         /*const a = document.createElement("a");

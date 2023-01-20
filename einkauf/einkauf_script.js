@@ -9,9 +9,6 @@ window.onload = function () {
 
 
 
-
-
-
     function hinzufuegen() {
         let benutzerEingabe = document.getElementById('aufgabe').value;
         aufgabenliste.push(benutzerEingabe);
