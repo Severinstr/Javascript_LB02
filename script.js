@@ -8,21 +8,13 @@ window.onload = function () {
         const password = document.getElementById("password").value;
 
 
-        /*const input = document.createElement("input");
-        input.type = "file";
-        input.accept = ".json";
-        input.addEventListener("change", function () {
-            const file = this.files[0];
-            const reader = new FileReader();
-            reader.addEventListener("load", function () {
-    
-                accounts = JSON.parse(this.result);**/
+
         const accountsJSON = localStorage.getItem('accounts');
 
 
-        //if tasksJSON contains data
+
         if (accountsJSON) {
-            accounts = JSON.parse(accountsJSON); /* Json Format zurück ind Javascript Objekt umwandeln**/
+            accounts = JSON.parse(accountsJSON);
         }
 
 
@@ -42,10 +34,7 @@ window.onload = function () {
 
         document.getElementById("message").innerHTML =
             "Invalid username or password";
-        /* });
-         reader.readAsText(file);
-     });
-     input.click();**/
+
     }
 
 
@@ -64,23 +53,19 @@ window.onload = function () {
             }
         }
 
-        const newAccount = { username: username, password: password };  /*->definition des object-literal account. bestehend aus username und passwort**/
+        const newAccount = { username: username, password: password };
         accounts.push(newAccount);
 
         saveAccountsToJSON();
 
-        document.getElementById("message").innerHTML =  /*->Durch diese 2. Zeilen code kommt der kommentar "Account created successfully"**/
+        document.getElementById("message").innerHTML =
             "Account created successfully!";
     }
     function saveAccountsToJSON() {
 
-        const accountsJSON = JSON.stringify(accounts);    /* account ins Json format umwandeln**/
+        const accountsJSON = JSON.stringify(accounts);
         localStorage.setItem('accounts', accountsJSON);
 
-        /*const a = document.createElement("a");
-        a.href = "data:text/json," + encodeURIComponent(accountsJSON);
-        a.download = "accounts.json";
-        a.click();**/
     }
 
     document.getElementById('loginbutton').addEventListener("click", login);
